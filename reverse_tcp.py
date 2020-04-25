@@ -13,10 +13,16 @@ s.listen(5)
 while(True):
   try:
     con,addr = s.accept()
-    con.send('bem vido ao servidor TCP\n')
-    con.send('>>>')
-    msg = con.recv(1024)
-    print 'conexao %s ' % msg
+    while True:
+      con.send('bem vido ao servidor TCP\n')
+      con.send('>>>')
+      msg = con.recv(1024)
+      if msg:
+        print 'conexao %s ' % msg
+      else:
+        con.close() 
+      break
+      con.close()
   except Exception as e:
     con.close()     
     break
