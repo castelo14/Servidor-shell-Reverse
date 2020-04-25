@@ -13,15 +13,13 @@ s.listen(5)
 while(True):
   try:
     con,addr = s.accept()
-    con.send('Bem vindo ao servidor tcp\n')
-    con.send('\nshell:')
-    log = open('log.txt','a')
-   while True: 
-     term = subprocess.Popen(str(con.recv(1024)),shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-     m = term.communicate()
-     log.write(str(con.recv(1024)))
-     log.close()
-     con.send(m[0]+'\n')
+    con.send('bem vido ao servidor TCP\n')
+    print 'conexão &s:&d' % (addr[0],addr[1])
+    con.send('>>>')
+    msg = con.recv(1024)
+    print 'conexao %s ' % msg
+    
   except Exception as e:
-    break     
+    con.close()     
+    break
 s.close()
