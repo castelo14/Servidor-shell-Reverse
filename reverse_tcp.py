@@ -14,11 +14,9 @@ while(True):
   try:
     con,addr = s.accept()
     con.send('bem vido ao servidor TCP\n')
-    print 'conexão &s:&d' % (addr[0],addr[1])
     con.send('>>>')
     msg = con.recv(1024)
     print 'conexao %s ' % msg
-    
   except Exception as e:
     con.close()     
     break
